@@ -1,5 +1,4 @@
 use std::{path::PathBuf, str::FromStr};
-
 use testcontainers::{
     ContainerAsync, GenericImage, ImageExt,
     core::{ContainerPort, WaitFor, wait::ExitWaitStrategy},
@@ -28,7 +27,6 @@ pub async fn setup_test_s3_instance() -> anyhow::Result<S3Instance> {
 
 pub const MINIO_ACCESS_KEY: &str = "fhevm-access-key";
 pub const MINIO_SECRET_KEY: &str = "fhevm-access-secret-key";
-
 pub const S3_CT: &str = "011e517540a10486971fbf81dcf64c1b2fc9965744d0c8f7da0e4b338f1a31a9";
 
 async fn configure_minio(url: &str) -> anyhow::Result<()> {
@@ -50,7 +48,7 @@ async fn configure_minio(url: &str) -> anyhow::Result<()> {
         .with_entrypoint("/bin/sh")
         .with_network("host")
         .with_copy_to(
-            format!("/data/{S3_CT}"),
+            format("/data/{S3_CT}"),
             PathBuf::from_str(&format!("{}/data/{}", env!("CARGO_MANIFEST_DIR"), S3_CT)).unwrap(),
         )
         .with_cmd(["-c", &cmd])
