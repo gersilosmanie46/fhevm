@@ -3,7 +3,7 @@
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-solidity"],
   "overrides": [
     {
-      "files": ["*.ts", ".js", ".cjs"],
+      "files": ["*.ts", "*.js", "*.cjs"],
       "options": {
         "singleQuote": true,
         "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]"],
@@ -13,7 +13,7 @@
       }
     },
     {
-      "files": "*.sol",
+      "files": ["*.sol"],
       "options": {
         "singleQuote": false
       }
