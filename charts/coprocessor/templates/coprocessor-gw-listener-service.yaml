@@ -7,6 +7,10 @@ metadata:
     app.kubernetes.io/name: {{ include "gwListenerName" . }}
   name: {{ include "gwListenerName" . }}
 spec:
+  type: ClusterIP
+  selector:
+    app: coprocessor-gw-listener
+    app.kubernetes.io/name: {{ include "gwListenerName" . }}
   ports:
     - name: metrics
       port: {{ .Values.gwListener.ports.metrics }}
@@ -14,8 +18,4 @@ spec:
     - name: healthcheck
       port: {{ .Values.gwListener.ports.healthcheck }}
       targetPort: healthcheck
-  selector:
-    app: coprocessor-gw-listener
-    app.kubernetes.io/name: {{ include "gwListenerName" . }}
-  type: ClusterIP
 {{- end }}
